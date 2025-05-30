@@ -20,8 +20,8 @@ TalentSync is a modern, scalable platform designed to connect learners with qual
 - **NGINX** – reverse proxy and load balancing
 - **Docker** – for containerization
 - **AWS** – deployment and cloud services
-- **CI/CD** – GitHub Actions or AWS CodePipeline (TBD)
-
+- **CI/CD** – Jenkins & GitHub Actions
+- **WebSocket** - Real time chat between students and istructors
 ---
 
 ## 🛠 Features
@@ -30,6 +30,7 @@ TalentSync is a modern, scalable platform designed to connect learners with qual
 - Role-based access: Student / Instructor / Admin
 - Skill-based lesson discovery & search
 - Real-time scheduling and booking system
+- Real-time chat system
 - Rating and review system
 - File and media uploads via Amazon S3
 - Admin dashboard for platform management
