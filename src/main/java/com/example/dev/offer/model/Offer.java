@@ -1,6 +1,7 @@
 package com.example.dev.offer.model;
 
 import com.example.dev.accounts.model.Account;
+import com.example.dev.utils.Currency;
 import com.example.dev.utils.Tag;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
@@ -34,11 +35,14 @@ public class Offer {
     @Column(name = "tags", nullable = false)
     @Enumerated(EnumType.STRING)
     private Tag tags;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "currency", nullable = false)
+    private Currency currency;
     @Column(name = "duration_in_minutes", nullable = false)
     @Min(value = 10, message = "Duration must be at least 10 minute")
     @Max(value = 3000, message = "Duration must not exceed 50 hours")
     private int durationInMinutes;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Account owner;
 
 }

@@ -44,11 +44,13 @@ public final class Account {
     @Column(name = "picture_url")
     private String pictureUrl;
     @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
     private Role role;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Offer> offers;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Schedule> schedules;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Payment> payments;
+
 }

@@ -1,5 +1,4 @@
 package com.example.dev.payment.model;
-
 import com.example.dev.utils.Currency;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,4 +33,5 @@ public class Payment {
     private String receiverId;
     @Column(name = "fee_rate", nullable = false, precision = 4, scale = 2)
     private BigDecimal feeRate;
+
 }
