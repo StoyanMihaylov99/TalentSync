@@ -1,10 +1,7 @@
 package com.example.dev.payment.model;
 
 import com.example.dev.utils.Currency;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,14 +23,15 @@ public class Payment {
     private String id;
     @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount", nullable = false, precision = 19, scale = 4)
     private BigDecimal amount;
     @Column(name = "currency", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Currency currency;
     @Column(name = "sender_id", nullable = false)
     private String senderId;
     @Column(name = "receiver_id", nullable = false)
     private String receiverId;
-    @Column(name = "fee_rate", nullable = false)
-    private double feeRate;
+    @Column(name = "fee_rate", nullable = false, precision = 4, scale = 2)
+    private BigDecimal feeRate;
 }
