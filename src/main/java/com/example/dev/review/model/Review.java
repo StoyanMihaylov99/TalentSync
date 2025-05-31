@@ -27,7 +27,7 @@ public class Review {
     private int rate;
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
-    @OneToOne(fetch = FetchType.LAZY)
-    private Account owner;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Account reviewer;
 
 }

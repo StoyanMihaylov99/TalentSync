@@ -2,6 +2,7 @@ package com.example.dev.accounts.model;
 
 import com.example.dev.offer.model.Offer;
 import com.example.dev.payment.model.Payment;
+import com.example.dev.review.model.Review;
 import com.example.dev.schedule.model.Schedule;
 import com.example.dev.utils.Role;
 import jakarta.persistence.*;
@@ -13,6 +14,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @NoArgsConstructor
@@ -46,11 +49,17 @@ public final class Account {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
-    @OneToMany(fetch = FetchType.LAZY)
+    @Column(name = "balance", nullable = false, precision = 19, scale = 4)
+    private BigDecimal balance;
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Offer> offers;
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Schedule> schedules;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Payment> payments;
+    @OneToMany(mappedBy = "reviewer", fetch = FetchType.LAZY)
+    private List<Review> reviews;
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY)
+    private List<Payment> receivedPayments;
+    @OneToMany(mappedBy = "sender", fetch = FetchType.LAZY)
+    private List<Payment> sentPayments;
 
 }

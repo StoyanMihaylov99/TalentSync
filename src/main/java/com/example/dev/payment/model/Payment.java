@@ -1,4 +1,5 @@
 package com.example.dev.payment.model;
+import com.example.dev.accounts.model.Account;
 import com.example.dev.utils.Currency;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,10 +28,10 @@ public class Payment {
     @Column(name = "currency", nullable = false)
     @Enumerated(EnumType.STRING)
     private Currency currency;
-    @Column(name = "sender_id", nullable = false)
-    private String senderId;
-    @Column(name = "receiver_id", nullable = false)
-    private String receiverId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Account sender;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Account receiver;
     @Column(name = "fee_rate", nullable = false, precision = 4, scale = 2)
     private BigDecimal feeRate;
 

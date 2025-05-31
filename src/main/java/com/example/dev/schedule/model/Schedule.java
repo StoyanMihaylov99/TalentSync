@@ -27,7 +27,5 @@ public class Schedule {
     private LocalDateTime startingDateTime;
     @ManyToOne(fetch = FetchType.LAZY)
     private Offer lessionOffer;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Account> participants;
 
 }

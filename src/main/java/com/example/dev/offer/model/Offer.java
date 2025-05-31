@@ -42,7 +42,7 @@ public class Offer {
     @Min(value = 10, message = "Duration must be at least 10 minute")
     @Max(value = 3000, message = "Duration must not exceed 50 hours")
     private int durationInMinutes;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Account owner;
 
 }
