@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,7 +35,7 @@ public class Offer {
     private BigDecimal price;
     @Column(name = "tags", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Tag tags;
+    private List<Tag> tags;
     @Enumerated(EnumType.STRING)
     @Column(name = "currency", nullable = false)
     private Currency currency;
