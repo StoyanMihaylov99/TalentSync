@@ -2,8 +2,7 @@ package com.example.dev.review.model;
 
 import com.example.dev.accounts.model.Account;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +21,7 @@ public class Review {
     @UuidGenerator
     private String id;
     @Column(name = "rate", nullable = false, precision = 2, scale = 1)
-    @Min(value = 1, message = "Rate must be between 1 and 5")
-    @Max(value = 5, message = "Rate must be between 1 and 5")
+    @Size(min = 1, max = 5, message = "Review rate must be between 1 and 5 characters long")
     private int rate;
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;

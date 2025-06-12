@@ -7,8 +7,7 @@ import com.example.dev.schedule.model.Schedule;
 import com.example.dev.utils.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,12 +29,10 @@ public final class Account {
     @UuidGenerator
     private String id;
     @Column(name = "first_name", nullable = false)
-    @Min(value = 2, message = "First name must be at least 2 characters long")
-    @Max(value = 20, message = "First name must not exceed 50 characters")
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters long")
     private String firstName;
     @Column(name = "last_name", nullable = false)
-    @Min(value = 2, message = "Last name must be at least 2 characters long")
-    @Max(value = 20, message = "Last name must not exceed 50 characters")
+    @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters long")
     private String lastName;
     @Email
     @Column(name = "email", nullable = false, unique = true)
