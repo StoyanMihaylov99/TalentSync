@@ -6,6 +6,7 @@ import com.example.dev.offer.repository.OfferRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,15 +30,15 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public String createOffer(OfferDto offerRequestDto) {
+    public Optional<String> createOffer(OfferDto offerRequestDto) {
         Offer offerToSave = modelMapper.map(offerRequestDto, Offer.class);
         offerRepository.save(offerToSave);
-        return offerRepository.findByTitle(offerToSave.getTitle()).get().getId();
+        return Optional.of(offerRepository.findByTitle(offerToSave.getTitle()).get().getId());
     }
 
     @Override
     public Optional<OfferDto> updateOffer(OfferDto offerRequestDto) {
-        Optional<Offer> existingOffer = offerRepository.findById(offerRequestDto.id());
+        Optional<Offer> existingOffer = offerRepository.findById(offerRequestDto.getId());
         if (existingOffer.isPresent()) {
             Offer newOfer = modelMapper.map(offerRequestDto, Offer.class);
             offerRepository.save(newOfer);
@@ -48,5 +49,17 @@ public class OfferServiceImpl implements OfferService {
     @Override
     public void deleteOffer(String offerId) {
         offerRepository.deleteById(offerId);
+    }
+
+    @Override
+    public Optional<List<OfferDto>> getAllOffers() {
+        List<Offer> offers = offerRepository.findAll();
+        if (offers.isEmpty()) {
+            return Optional.empty();
+        }
+        List<OfferDto> offerDtos = offers.stream()
+                .map(offer -> modelMapper.map(offer, OfferDto.class))
+                .toList();
+        return Optional.of(offerDtos);
     }
 }

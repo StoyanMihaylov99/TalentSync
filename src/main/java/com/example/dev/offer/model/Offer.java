@@ -6,6 +6,7 @@ import com.example.dev.utils.Tag;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,8 +27,7 @@ public class Offer {
     @UuidGenerator
     private String id;
     @Column(name = "title", nullable = false)
-    @Min(value = 3, message = "Title must be at least 3 characters long")
-    @Max(value = 100, message = "Title must not exceed 100 characters")
+    @Size(min = 3, max = 100, message = "Title must be between 3 and 100 characters long")
     private String title;
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
