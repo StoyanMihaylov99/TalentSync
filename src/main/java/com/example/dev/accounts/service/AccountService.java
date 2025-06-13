@@ -2,13 +2,13 @@ package com.example.dev.accounts.service;
 
 import com.example.dev.accounts.dto.AccountDto;
 
+import java.util.Optional;
+
 public interface AccountService {
 
-    String createAccount(AccountDto account);
+    Optional<String> createAccount(AccountDto account);
 
-    AccountDto getAccountById(String accountId);
+    Optional<AccountDto> getAccountById(String accountId);
 
-    AccountDto updateAccount(String accountId, AccountDto account);
-
-    void deleteAccount(String accountId);
+    Optional<AccountDto> updateAccount(AccountDto account);
 }

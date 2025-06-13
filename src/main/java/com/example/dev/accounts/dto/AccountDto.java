@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -31,4 +32,5 @@ public class AccountDto {
     private List<Review> reviews;
     private List<Payment> receivedPayments;
     private List<Payment> sentPayments;
+    private LocalDate dateOfBirth;
 }

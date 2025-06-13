@@ -31,17 +31,18 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public Optional<String> createOffer(OfferDto offerRequestDto) {
-        Offer offerToSave = modelMapper.map(offerRequestDto, Offer.class);
-        offerRepository.save(offerToSave);
-        return Optional.of(offerRepository.findByTitle(offerToSave.getTitle()).get().getId());
+        Offer savedOffer = offerRepository.save(modelMapper.map(offerRequestDto, Offer.class));
+        return Optional.of(savedOffer.getId());
     }
 
     @Override
-    public Optional<OfferDto> updateOffer(OfferDto offerRequestDto) {
-        Optional<Offer> existingOffer = offerRepository.findById(offerRequestDto.getId());
+    public Optional<OfferDto> updateOffer(String id,OfferDto offerRequestDto) {
+        Optional<Offer> existingOffer = offerRepository.findById(id);
         if (existingOffer.isPresent()) {
             Offer newOfer = modelMapper.map(offerRequestDto, Offer.class);
-            offerRepository.save(newOfer);
+            newOfer.setId(id);
+            newOfer.setOwner(existingOffer.get().getOwner());
+            return Optional.of(modelMapper.map(offerRepository.save(newOfer), OfferDto.class));
         }
         return Optional.empty();
     }

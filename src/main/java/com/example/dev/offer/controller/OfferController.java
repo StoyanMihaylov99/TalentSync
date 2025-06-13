@@ -5,7 +5,10 @@ import com.example.dev.offer.service.OfferService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -21,8 +24,12 @@ public class OfferController {
 
     @PostMapping
     public ResponseEntity<String> createOffer(@RequestBody OfferDto offerDto) {
-        String id = offerService.createOffer(offerDto).toString();
-        return ResponseEntity.status(201).body(id);
+        Optional<String> id = offerService.createOffer(offerDto);
+        if (id.isPresent()) {
+            URI location = URI.create("/offers/" + id.get());
+            return ResponseEntity.created(location).body(id.get());
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{offerId}")
@@ -42,7 +49,7 @@ public class OfferController {
     @PutMapping("/{offerId}")
     public ResponseEntity<OfferDto> updateOffer(@PathVariable String offerId, @RequestBody OfferDto offerDto) {
         OfferDto updatedOffer = modelMapper.map(offerDto, OfferDto.class);
-        return offerService.updateOffer(updatedOffer)
+        return offerService.updateOffer(offerId,updatedOffer)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

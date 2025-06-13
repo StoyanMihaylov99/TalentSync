@@ -13,8 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
-
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
@@ -22,7 +22,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "accounts")
-public final class Account {
+public class Account {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -48,6 +48,8 @@ public final class Account {
     private Role role;
     @Column(name = "balance", nullable = false, precision = 19, scale = 4)
     private BigDecimal balance;
+    @Column(name = "date_of_birth", nullable = false)
+    private LocalDate dateOfBirth;
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Offer> offers;
     @ManyToMany(fetch = FetchType.LAZY)

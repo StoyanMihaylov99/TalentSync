@@ -12,7 +12,7 @@ public interface OfferService {
 
     Optional<String> createOffer(@RequestBody OfferDto offerRequestDto);
 
-    Optional<OfferDto> updateOffer(@RequestBody OfferDto offerRequestDto);
+    Optional<OfferDto> updateOffer(String id,@RequestBody OfferDto offerRequestDto);
 
     void deleteOffer(String offerId);
 
