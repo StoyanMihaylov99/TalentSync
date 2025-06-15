@@ -1,5 +1,6 @@
 package com.example.dev.offer.service;
 
+import com.example.dev.offer.dto.CreateOfferResponseDto;
 import com.example.dev.offer.dto.OfferDto;
 import com.example.dev.offer.model.Offer;
 import com.example.dev.offer.repository.OfferRepository;
@@ -30,9 +31,9 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Override
-    public Optional<String> createOffer(OfferDto offerRequestDto) {
+    public Optional<CreateOfferResponseDto> createOffer(OfferDto offerRequestDto) {
         Offer savedOffer = offerRepository.save(modelMapper.map(offerRequestDto, Offer.class));
-        return Optional.of(savedOffer.getId());
+        return Optional.of(new CreateOfferResponseDto(savedOffer.getId()));
     }
 
     @Override

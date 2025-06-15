@@ -1,12 +1,11 @@
 package com.example.dev.offer.controller;
 
+import com.example.dev.offer.dto.CreateOfferResponseDto;
 import com.example.dev.offer.dto.OfferDto;
 import com.example.dev.offer.service.OfferService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/offers")
 public class OfferController {
+
     private final OfferService offerService;
     private final ModelMapper modelMapper;
 
@@ -23,11 +23,10 @@ public class OfferController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createOffer(@RequestBody OfferDto offerDto) {
-        Optional<String> id = offerService.createOffer(offerDto);
-        if (id.isPresent()) {
-            URI location = URI.create("/offers/" + id.get());
-            return ResponseEntity.created(location).body(id.get());
+    public ResponseEntity<CreateOfferResponseDto> createOffer(@RequestBody OfferDto offerDto) {
+        Optional<CreateOfferResponseDto> response = offerService.createOffer(offerDto);
+        if (response.isPresent()) {
+            return ResponseEntity.status(201).body(response.get());
         }
         return ResponseEntity.badRequest().build();
     }
@@ -59,5 +58,4 @@ public class OfferController {
         offerService.deleteOffer(offerId);
         return ResponseEntity.noContent().build();
     }
-
 }

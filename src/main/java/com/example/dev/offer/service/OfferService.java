@@ -1,5 +1,6 @@
 package com.example.dev.offer.service;
 
+import com.example.dev.offer.dto.CreateOfferResponseDto;
 import com.example.dev.offer.dto.OfferDto;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -10,7 +11,7 @@ public interface OfferService {
 
     Optional<OfferDto> getOfferById(String offerId);
 
-    Optional<String> createOffer(@RequestBody OfferDto offerRequestDto);
+    Optional<CreateOfferResponseDto> createOffer(@RequestBody OfferDto offerRequestDto);
 
     Optional<OfferDto> updateOffer(String id,@RequestBody OfferDto offerRequestDto);
 
