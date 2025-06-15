@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountDto {
+
     private String id;
     private String email;
     private String firstName;
